@@ -1,0 +1,46 @@
+$dark-half: #494949;
+$purple: #d897eb; // Shadow
+$shadow-1: 4px 4px 20px 0 rgba(0,0,0,0.01);
+$shadow-2: 4px 4px 40px 0 rgba(0,0,0,0.05); //transition
+$transition-ease-in: all 0.3s ease-in;
+$transition-ease-out: all 0.3s ease-out; //mix
+
+@mixin text-overflow(){
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin div-100(){
+  width: 100%;
+  height: 100%;
+}
+
+@mixin flex-justify-align($justify-content:center,$align-items:center,$flex-direction: row){
+  display: flex;
+  justify-content:$justify-content;
+  align-items: $align-items;
+  flex-direction: $flex-direction
+}
+
+// colors
+$color-primary: #00558b;
+$color-primary-light: #108eb9;
+$color-link: #108ee9;
+$color-success: #27ae60;
+$color-error: #f15354;
+$color-warning: #f1c40f;
+$color-text: #666;
+$color-border-base: #e5e5e5;
+$color-border-split: #f4f4f4;
+$border-radius-base: 3px;
+$border-radius-sm: 2px;
+$shadow-color: rgba(0,0,0,0.05);
+$shadow-1-down: 4px 4px 40px $shadow-color;
+$border-color-split: #f4f4f4;
+$border-color-base: #e5e5e5;
+$menu-dark-bg: #3e3e3e;
+$text-color: #666;
+$font-size-base: 15px;
+$menu-background-color: #0075a8;
+$font-family: '"AvenirNext-Regular", "Helvetica Neue", "lucida grande", "PingFangHK-Light", "STHeiti", "Heiti SC", "Hiragino Sans GB", "Microsoft JhengHei", "Microsoft Yahei", SimHei, "WenQuanYi Micro Hei", "Droid Sans", "Roboto", Helvetica, Tahoma, Arial, "sans-serif"';

@@ -1,0 +1,11 @@
+#root {
+  @include div-100;
+  .layout {
+    @include div-100;
+    @include flex-justify-align(center, center, column);
+    .content {
+      @include div-100;
+      flex: 1;
+    }
+  }
+}

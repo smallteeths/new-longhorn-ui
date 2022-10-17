@@ -1,14 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+import store from './models/store';
+import {
+  RouterProvider,
+} from "react-router-dom";
+import { Provider } from 'react-redux'
 import reportWebVitals from './reportWebVitals';
+import router from "./router";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+// import assets
+import './assets/iconfont/iconfont.eot'
+import './assets/iconfont/iconfont.svg'
+import './assets/iconfont/iconfont.ttf'
+import './assets/iconfont/iconfont.woff'
+
+//import antd css
+import './antd.css'
+
+// import global styles
+import './assets/styles/index.scss'
+
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
