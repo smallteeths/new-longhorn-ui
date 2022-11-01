@@ -6,6 +6,10 @@
     .content {
       @include div-100;
       flex: 1;
+      .site-layout-content {
+        background-color: $content-background-color;
+        overflow: auto;
+      }
     }
   }
 }

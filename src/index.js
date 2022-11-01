@@ -15,7 +15,7 @@ import './assets/iconfont/iconfont.ttf'
 import './assets/iconfont/iconfont.woff'
 
 //import antd css
-import './antd.css'
+import './index.css'
 
 // import global styles
 import './assets/styles/index.scss'

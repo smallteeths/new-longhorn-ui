@@ -21,11 +21,20 @@
       border-bottom: 4px solid $color-primary-light;
       background-color: #00558b;
     }
-
+    .ant-menu-item-selected {
+      &::after {
+        border-bottom: none !important;
+      }
+      border-bottom: 4px solid $color-primary-light;
+      background-color: #00558b;
+    }
     .ant-menu-item:hover, .ant-menu-submenu:hover {
       color: #78c9cf;
       background: rgba(0,0,0,.15);
       border-bottom: 4px solid $color-link;
+      &::after {
+        border-bottom: none !important;
+      }
     }
 
     a, .ant-menu-submenu-title {
