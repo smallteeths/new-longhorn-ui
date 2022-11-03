@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Row, Col, Popover } from 'antd'
+import { useDispatch } from 'react-redux'
 import {
   BarsOutlined,
 } from '@ant-design/icons';
 import { useLocation } from 'react-router-dom';
+import { setIsPhoneSize } from '../../models/global/global'
 import styles from './header.module.scss'
 import Menus from './menu'
 import longhornLogo from '../../assets/images/longhorn-logo.svg'
@@ -15,9 +17,12 @@ function Header() {
     location,
     isNavbar,
   }
-  useEffect( () => {
-    console.log(isNavbar);
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(setIsPhoneSize(isNavbar))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isNavbar]);
+
 
   return (
     <div className={styles.header}>

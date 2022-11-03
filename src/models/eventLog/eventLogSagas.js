@@ -6,8 +6,6 @@ export function* fetchDataSaga(payload) {
   yield put(setLoading(true))
   try {
     let result = yield call(query);
-    console.log("yyyyyyyyyyyyyyyy")
-    console.log(result)
     yield put(fetchData(result.data));
   } catch (e) {
     yield put(fetchData([]));

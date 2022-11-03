@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import store from '../../models/store';
 import ResourceOverview from './resourceOverview'
 import EventLogs from './eventLogs'
+import { saveSorter } from '../../utils/localStore'
 
 export function Dashboard() {
   const action = type => store.dispatch({type})
@@ -37,15 +38,13 @@ export function Dashboard() {
 
   const eventLogsProps = {
     data: eventLogData,
+    loading: eventLogLoading,
     onSorterChange(s) {
-      console.log(s)
-    },
-    sorter: (s)=> {
-      console.log(s)
+      // Save to local store
+      saveSorter('eventlogList.sorter', s)
     },
   }
 
-  console.log(nodeData)
   return (
     <div>
       <ResourceOverview {...resourceOverviewProps} />

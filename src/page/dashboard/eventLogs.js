@@ -3,19 +3,61 @@ import PropTypes from 'prop-types'
 import {
   FilterOutlined,
 } from '@ant-design/icons';
-import { Table, Input, Button } from 'antd'
+import { useSelector } from 'react-redux'
+import { Table, Input, Button, Spin } from 'antd'
 import TableGrid from '../../components/common/tableGrid'
 import classnames from 'classnames'
 import { sortTable, sortTableByISODate, setSortOrder } from '../../utils/sort'
+import { getSorter } from '../../utils/localStore'
 import styles from './eventLogs.module.scss'
 
+const parseData = (parameterData) => {
+  if (!parameterData) {
+    return []
+  }
+  let eventlogs = parameterData.map((item) => {
+    let obj = {}
+    obj.eventType = item.eventType
+    return Object.assign(obj, item.event)
+  })
+  const getSourceText = (source) => {
+    return source ? Object.values(source).join(', ') : ''
+  }
+  return eventlogs.map((item, index) => ({ ...item, sourceText: getSourceText(item.source), nameText: item.involvedObject ? item.involvedObject.name : '', index }))
+}
+
+const wrapValue = (value, searchText) => {
+  if (value) {
+    return value.split(new RegExp(`(?<=${searchText})|(?=${searchText})`, 'i')).map((fragment, i) => (
+      fragment.toLowerCase() === searchText.toLowerCase()
+        ? <span key={i} className="highlight">{fragment}</span> : fragment // eslint-disable-line
+    ))
+  }
+  return value
+}
+
+const filterData = (parameterData, field, searchText) => {
+  console.log(parameterData)
+  if (searchText.trim() === '') {
+    return parameterData
+  }
+  const d = parameterData.filter(item => item[field].toLowerCase().includes(searchText))
+  switch (field) {
+    case 'nameText':
+      return d.map(item => ({ ...item, nameText: wrapValue(item.nameText, searchText) }))
+    case 'sourceText':
+      return d.map(item => ({ ...item, sourceText: wrapValue(item.sourceText, searchText) }))
+    default:
+      return d
+  }
+}
 function EventLogs(props) {
-  const { data = [], sorter, onSorterChange = f => f} = props
+  const { onSorterChange = f => f, loading} = props
   const [ state, setState ] = useState({
     filterDropdownVisible: false,
     filterNameDropdownVisible: false,
     filterSourceDropdownVisible: false,
-    data,
+    data: parseData(props.data),
     searchText: '',
     searchField: '',
     searchInput: {
@@ -23,24 +65,22 @@ function EventLogs(props) {
       sourceText: '',
     },
   });
-  console.log(props)
+  const [ stateCurrentPage, setStateCurrentPage ] = useState(1)
   const searchNameInput = useRef(0);
   const searchSourceInput = useRef(1);
+  // Compatible with mobile terminal
+  const global = useSelector((state) => state.global)
+  const { isPhoneSize } = global
 
-  const filterData = (parameterData, field, searchText) => {
-    if (searchText.trim() === '') {
-      return parameterData
+  useEffect(() => {
+    const newData = parseData(props.data)
+    if (state.searchField && state.searchText) {
+      setState({ ...state, data: filterData(newData, state.searchField, state.searchText) })
+    } else {
+      setState({ ...state, data: newData })
     }
-    const d = parameterData.filter(item => item[field].toLowerCase().includes(searchText))
-    switch (field) {
-      case 'nameText':
-        return d.map(item => ({ ...item, nameText: wrapValue(item.nameText, searchText) }))
-      case 'sourceText':
-        return d.map(item => ({ ...item, sourceText: wrapValue(item.sourceText, searchText) }))
-      default:
-        return d
-    }
-  }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.data]);
 
   const onSearchNameChange = (e) => {
     setState({
@@ -63,7 +103,7 @@ function EventLogs(props) {
   }
 
   const onSearch = (searchField) => {
-    const newData = parseData(data)
+    const newData = parseData(props.data)
     const searchText = state.searchInput[searchField]
     const filteredData = filterData(newData, searchField, searchText)
     setState({
@@ -80,7 +120,7 @@ function EventLogs(props) {
   const onReset = () => {
     setState({
       ...state,
-      data: parseData(data),
+      data: state.data,
       searchText: '',
       searchField: '',
       searchInput: {
@@ -90,64 +130,22 @@ function EventLogs(props) {
     })
   }
 
-  const parseData = (parameterData) => {
-    let eventlogs = parameterData.map((item) => {
-      let obj = {}
-      obj.eventType = item.eventType
-      return Object.assign(obj, item.event)
-    })
-    const getSourceText = (source) => {
-      return source ? Object.values(source).join(', ') : ''
-    }
-    return eventlogs.map((item, index) => ({ ...item, sourceText: getSourceText(item.source), nameText: item.involvedObject ? item.involvedObject.name : '', index }))
-  }
-
-  const wrapValue = (value, searchText) => {
-    if (value) {
-      return value.split(new RegExp(`(?<=${searchText})|(?=${searchText})`, 'i')).map((fragment, i) => (
-        fragment.toLowerCase() === searchText.toLowerCase()
-          ? <span key={i} className="highlight">{fragment}</span> : fragment // eslint-disable-line
-      ))
-    }
-    return value
-  }
-
-  useEffect(() => {
-    const newData = parseData(props.data)
-    console.log("=====================")
-    console.log(newData)
-    if (state.searchField && state.searchText) {
-      setState({ ...state, data: filterData(newData, state.searchField, state.searchText) })
-    } else {
-      setState({ ...state, data: newData })
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.data]);
-
   const rowClassName = (record, index) => {
     if (index % 2 === 0) {
       return 'rowStriped'
     }
     return ''
   }
-  const filtersEventType = Array.from(data.filter(item => item.eventType !== '')
-    .reduce((results, item) => {
-      results.add(item.eventType)
-      return results
-    }, new Set()))
-    .map(item => ({ text: item, value: item }))
-  const filtersKind = Array.from(data.filter(item => item.involvedObject && item.involvedObject.kind !== '')
-    .reduce((results, item) => {
-      results.add(item.involvedObject.kind)
-      return results
-    }, new Set())).map(item => ({ text: item, value: item }))
+  
   const columns = [
     {
       title: 'Last Seen',
       dataIndex: 'lastTimestamp',
       key: 'lastTimestamp',
       className: 'date',
-      sorter: (a, b) => sortTableByISODate(a, b, 'lastTimestamp'),
+      sorter: {
+        compare: (a, b) => sortTableByISODate(a, b, 'lastTimestamp')
+      },
       render(text) {
         return (<div className="seenTime">{text}</div>)
       },
@@ -165,7 +163,7 @@ function EventLogs(props) {
       dataIndex: 'count',
       key: 'count',
       className: 'text',
-      sorter: (a, b) => sortTable(a, b, 'count'),
+      sorter: (a, b) => a.count - b.count,
       render(text) {
         return (<div className="count">{text}</div>)
       },
@@ -193,8 +191,7 @@ function EventLogs(props) {
         setState({
           ...state,
           filterNameDropdownVisible: visible,
-        }, () => searchNameInput.focus())
-
+        })
       },
       sorter: (a, b) => sortTable(a, b, 'nameText'),
       render: (text) => {
@@ -213,30 +210,18 @@ function EventLogs(props) {
       dataIndex: 'involvedObject.kind',
       key: 'involvedObject.kind',
       className: 'text',
-      filters: filtersKind,
       sorter: (a, b) => sortTable(a, b, 'involvedObject.kind'),
       onFilter: (value, record) => ((record.involvedObject && record.involvedObject.kind) || '').indexOf(value) === 0,
       render(text) {
         return (<div className="kind">{text}</div>)
       },
     },
-    // {
-    //   title: 'Subobject',
-    //   dataIndex: 'involvedObject.fieldPath',
-    //   key: 'involvedObject.fieldPath',
-    //   className: 'text',
-    //   sorter: (a, b) => sortTable(a, b, 'involvedObject.fieldPath'),
-    //   render: (text) => {
-    //     return <div className="subobject">{text}</div>
-    //   },
-    // },
     {
       title: 'Type',
       dataIndex: 'eventType',
       key: 'eventType',
       className: 'text',
       width: 120,
-      filters: filtersEventType,
       sorter: (a, b) => sortTable(a, b, 'eventType'),
       onFilter: (value, record) => (record.eventType || '').indexOf(value) === 0,
       render(text) {
@@ -276,7 +261,7 @@ function EventLogs(props) {
         setState({
           ...state,
           filterSourceDropdownVisible: visible,
-        }, () => searchSourceInput.focus())
+        })
       },
     }, {
       title: 'Message',
@@ -288,29 +273,43 @@ function EventLogs(props) {
       },
     },
   ]
-  const onChange = (p, f, s) => {
-    onSorterChange(s)
-  }
+  const sorter = getSorter('eventlogList.sorter')
   setSortOrder(columns, sorter)
 
+  const onChange = (p, f, s) => {
+    setStateCurrentPage(p.current)
+    onSorterChange(s)
+    // Get local store sorter
+    const sorter = getSorter('eventlogList.sorter')
+    setSortOrder(columns, sorter)
+  }
+
   return (
-    <div className={classnames(styles.eventLogs,'px-20 mt-20')}>
-      <div className={classnames(styles.title,"font-extrabold text-18 text-current mt-10 mb-10")}>Event Log</div>
-        <div className="content">
-          <Table columns={columns}
-            onChange={onChange}
+    <Spin spinning={loading}>
+      <div className={classnames(styles.eventLogs,'px-20 mt-20')}>
+        <div className={classnames(styles.title,"font-extrabold text-18 text-current mt-10 mb-10")}>Event Log</div>
+          {!isPhoneSize && <div className="content">
+            <Table columns={columns}
+              onChange={onChange}
+              rowKey={(record) => record.index}
+              rowClassName={rowClassName}
+              pagination={{
+                current: stateCurrentPage
+              }}
+              dataSource={state.data} />
+        </div>}
+        {isPhoneSize && <div>
+          <TableGrid
+            columns={columns}
+            dataSource={state.data}
+            mainKey={'type'}
             rowKey={(record) => record.index}
-            rowClassName={rowClassName}
-            getPopupContainer={trigger => trigger.parentNode}
-            dataSource={state.data} />
-       </div>
-       <div>
-        <TableGrid
-          columns={columns}
-          dataSource={state.data}
-        />
-       </div>
-     </div>
+            currentPage={stateCurrentPage}
+            setPropsCurrentPage={setStateCurrentPage}
+          />
+        </div>}
+      </div>
+    </Spin>
   )
 }
 
@@ -318,6 +317,7 @@ EventLogs.propTypes = {
   data: PropTypes.array,
   sorter: PropTypes.func,
   onSorterChange: PropTypes.func,
+  loading: PropTypes.bool
 }
 
 export default EventLogs

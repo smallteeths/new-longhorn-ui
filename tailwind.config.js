@@ -323,4 +323,7 @@ module.exports = {
     },
   },
   plugins: [],
+  variants: {
+    transitionProperty: ['responsive', 'motion-safe', 'motion-reduce']
+  }
 }

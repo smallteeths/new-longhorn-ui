@@ -13,7 +13,14 @@ const { Content, Footer } = Layout;
 export function APP() {
 
   return (
-    <ConfigProvider>
+    <ConfigProvider
+      getPopupContainer={node => {
+        if (node) {
+          return node.parentNode;
+        }
+        return document.body;
+      }}
+    >
       <Helmet>
         <title>Longhorn</title>
         <link rel="icon" href={config.logoSrc} type="image/x-icon" />

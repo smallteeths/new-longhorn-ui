@@ -6,11 +6,13 @@ import volumeReducer from './volume/volume'
 import volumeSaga from './volume/volumeSagas'
 import nodeReducer from './node/node'
 import nodeSaga from './node/nodeSagas'
+import globalReducer from './global/global'
 
 const sagaMiddleware = createSagaMiddleware()
 
 export default configureStore({
   reducer: {
+    global: globalReducer,
     eventLog: eventLogReducer,
     volume: volumeReducer,
     node: nodeReducer,

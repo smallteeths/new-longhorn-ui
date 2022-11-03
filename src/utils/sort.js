@@ -53,6 +53,7 @@ export function sortBackups(dataSource) {
 }
 
 export function sortTable(a, b, prop) {
+  console.log(a)
   const reg = /^\d+$/
   let valueA = getPropValue(a, prop)
   let valueB = getPropValue(b, prop)
@@ -110,10 +111,10 @@ export function sortTableObject(a, b, prop, propin) {
 }
 
 export function sortTableByISODate(a, b, prop) {
-  console.log(prop)
+  
   const valueA = isoStrToDate(getPropValue(a, prop))
   const valueB = isoStrToDate(getPropValue(b, prop))
-
+  console.log(valueA < valueB)
   if (valueA < valueB) {
     return -1
   }

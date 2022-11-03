@@ -198,28 +198,26 @@ export function ResourceOverview({ host, volume, volumeLoading, nodeLoading,  on
     },
   }
   return (
-    <Spin spinning={false}>
-      <div className="flex justify-around flex-wrap">
-        <div className='px-10'>
-          <Spin spinning={volumeLoading}>
-            <ResourceChart {...volumeInfoChartProps} />
-            <ResourceDetail {...volumeInfoDetailProps} />
-          </Spin>
-        </div>
-        <div className='px-10'>
-          <Spin spinning={nodeLoading && volumeLoading}>
-            <ResourceChart {...storageSpaceChartProps} />
-            <ResourceDetail {...storageSpaceDetailProps} />
-          </Spin>
-        </div>
-        <div className='px-10'>
-          <Spin spinning={nodeLoading}>
-            <ResourceChart {...nodeInfoChartProps} />
-            <ResourceDetail {...nodeInfoDetailProps} />
-          </Spin>
-        </div>
+    <div className="flex justify-around flex-wrap">
+      <div className='px-10'>
+        <Spin spinning={volumeLoading}>
+          <ResourceChart {...volumeInfoChartProps} />
+          <ResourceDetail {...volumeInfoDetailProps} />
+        </Spin>
       </div>
-    </Spin>
+      <div className='px-10'>
+        <Spin spinning={nodeLoading && volumeLoading}>
+          <ResourceChart {...storageSpaceChartProps} />
+          <ResourceDetail {...storageSpaceDetailProps} />
+        </Spin>
+      </div>
+      <div className='px-10'>
+        <Spin spinning={nodeLoading}>
+          <ResourceChart {...nodeInfoChartProps} />
+          <ResourceDetail {...nodeInfoDetailProps} />
+        </Spin>
+      </div>
+    </div>
   )
 }
 
