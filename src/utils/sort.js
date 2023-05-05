@@ -2,18 +2,18 @@ import { isoStrToDate, utcStrToDate } from './formater'
 
 const getStateWeight = (state) => {
   switch (state) {
-    case 'healthy':
-      return 0
-    case 'created':
-      return 1
-    case 'degraded':
-      return 2
-    case 'faulted':
-      return 3
-    case 'detached':
-      return 4
-    default:
-      return 99
+  case 'healthy':
+    return 0
+  case 'created':
+    return 1
+  case 'degraded':
+    return 2
+  case 'faulted':
+    return 3
+  case 'detached':
+    return 4
+  default:
+    return 99
   }
 }
 

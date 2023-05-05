@@ -1,17 +1,17 @@
 import React from 'react';
 import {
   createBrowserRouter,
-} from "react-router-dom";
+} from 'react-router-dom';
 import { Dashboard } from './page/dashboard/dashboard';
 import { APP } from './page/app';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <APP />,
     children: [
       {
-        path: "dashboard",
+        path: 'dashboard',
         element: <Dashboard />,
       },
     ]

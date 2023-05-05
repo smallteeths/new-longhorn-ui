@@ -43,12 +43,12 @@ const filterData = (parameterData, field, searchText) => {
   }
   const d = parameterData.filter(item => item[field].toLowerCase().includes(searchText))
   switch (field) {
-    case 'nameText':
-      return d.map(item => ({ ...item, nameText: wrapValue(item.nameText, searchText) }))
-    case 'sourceText':
-      return d.map(item => ({ ...item, sourceText: wrapValue(item.sourceText, searchText) }))
-    default:
-      return d
+  case 'nameText':
+    return d.map(item => ({ ...item, nameText: wrapValue(item.nameText, searchText) }))
+  case 'sourceText':
+    return d.map(item => ({ ...item, sourceText: wrapValue(item.sourceText, searchText) }))
+  default:
+    return d
   }
 }
 function EventLogs(props) {
@@ -287,16 +287,16 @@ function EventLogs(props) {
   return (
     <Spin spinning={loading}>
       <div className={classnames(styles.eventLogs,'px-20 mt-20')}>
-        <div className={classnames(styles.title,"font-extrabold text-18 text-current mt-10 mb-10")}>Event Log</div>
-          {!isPhoneSize && <div className="content">
-            <Table columns={columns}
-              onChange={onChange}
-              rowKey={(record) => record.index}
-              rowClassName={rowClassName}
-              pagination={{
-                current: stateCurrentPage
-              }}
-              dataSource={state.data} />
+        <div className={classnames(styles.title, 'font-extrabold text-18 text-current mt-10 mb-10')}>Event Log</div>
+        {!isPhoneSize && <div className="content">
+          <Table columns={columns}
+            onChange={onChange}
+            rowKey={(record) => record.index}
+            rowClassName={rowClassName}
+            pagination={{
+              current: stateCurrentPage
+            }}
+            dataSource={state.data} />
         </div>}
         {isPhoneSize && <div>
           <TableGrid

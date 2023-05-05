@@ -56,6 +56,7 @@ if (process.env.HOST) {
     )
   );
   console.log(
+    // eslint-disable-next-line quotes
     `If this was unintentional, check that you haven't mistakenly set it in your shell.`
   );
   console.log(

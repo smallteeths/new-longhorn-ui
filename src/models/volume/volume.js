@@ -1,28 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { commonFetchData, commonSetLoading, commonSetWsStatus } from '../actions'
 
 export const volumeSlice = createSlice({
   name: 'volume',
   initialState: {
     loading: false,
+    wsStatus: false,
     data: [],
   },
   reducers: {
-    fetchData: (state, action) => {
-      return {
-        ...state,
-        data: action.payload
-      };
-    },
-    setLoading: (state, action) => {
-      return {
-        ...state,
-        loading: action.payload
-      };
-    },
+    fetchData: commonFetchData,
+    setLoading: commonSetLoading,
+    setWsStatus: commonSetWsStatus,
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { fetchData, setLoading } = volumeSlice.actions
+export const {
+  fetchData,
+  setLoading,
+  setWsStatus
+} = volumeSlice.actions
 
 export default volumeSlice.reducer

@@ -78,4 +78,17 @@ export function formatSnapshot(selectVolume, snapshot) {
     backupStatusObject,
   }
 }
+
+export function constructWebsocketURL(type, period) {
+  let loc = window.location
+
+  let proto = 'ws:'
+  if (loc.protocol === 'https:') {
+    proto = 'wss:'
+  }
+
+  let prefix = window.__pathname_prefix__ // eslint-disable-line no-underscore-dangle
+
+  return `${proto}//${loc.host}${prefix}${prefix.endsWith('/') ? '' : '/'}v1/ws/${period}/${type}`
+}
   

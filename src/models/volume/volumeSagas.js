@@ -1,8 +1,11 @@
-import { call, takeEvery, put } from "redux-saga/effects";
-import { fetchData, setLoading } from "./volume";
+import { call, takeLatest, put, fork } from 'redux-saga/effects';
+import { fetchData, setLoading, setWsStatus } from './volume';
 import { query } from '../../services/volume'
+import { FETCH_VOLUME, VOLUME_CONNECT_WS, DISCONNECT_VOLUME_WEBSOCKET} from '../actionTypes'
+import { manageWebSocketSaga } from '../ws/wsSagas'
+import { constructWebsocketURL } from '../../utils/formater'
 
-export function* fetchDataSaga(payload) {
+export function* fetchDataSaga() {
   yield put(setLoading(true))
   try {
     let result = yield call(query);
@@ -13,6 +16,11 @@ export function* fetchDataSaga(payload) {
   yield put(setLoading(false))
 }
 
+export function* volumeConnectWs() {
+  yield fork(manageWebSocketSaga, constructWebsocketURL('volumes', '1s'), setWsStatus, fetchData, DISCONNECT_VOLUME_WEBSOCKET);
+}
+
 export default function* eventLogSaga() {
-  yield takeEvery("FETCH_VOLUME", fetchDataSaga);
+  yield takeLatest(FETCH_VOLUME, fetchDataSaga);
+  yield takeLatest(VOLUME_CONNECT_WS, volumeConnectWs);
 }

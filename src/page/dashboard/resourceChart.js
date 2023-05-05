@@ -54,7 +54,7 @@ export function ResourceChart(props) {
           >
             <Cell fill="#dee1e3" />
             <Label position="center" style={{ fontSize: '26px', fontWeight: 600, fill: '#dee1e3' }}>
-            {empty}
+              {empty}
             </Label>
           </Pie>
         </PieChart>
@@ -83,7 +83,7 @@ export function ResourceChart(props) {
           {...chartOption}
         >
           {
-            data.map((entry, index) => <Cell className={classnames({ "cursor-pointer": clickable })} strokeWidth={0} key={entry.name} fill={colors[index % colors.length]} />)
+            data.map((entry, index) => <Cell className={classnames({ 'cursor-pointer': clickable })} strokeWidth={0} key={entry.name} fill={colors[index % colors.length]} />)
           }
           <Label position="center" dy={-20} style={{ fontSize: '36px', fontWeight: 600, fill: '#707070' }}>
             {title}

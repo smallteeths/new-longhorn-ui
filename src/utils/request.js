@@ -23,17 +23,18 @@ const fetch = (options) => {
   } = options
   url = url ? url.replace(C.RegExp.REQUEST, '') : ''
 
+  console.log(config)
   switch (method.toLowerCase()) {
-    case 'get':
-      return axios.get(`${url}${options.data ? `?${qs.stringify(options.data)}` : ''}`, config)
-    case 'delete':
-      return axios.delete(url, { ...config, data })
-    case 'post':
-      return axios.post(url, data, config)
-    case 'put':
-      return axios.put(url, data, config)
-    default:
-      return axios(options)
+  case 'get':
+    return axios.get(`${url}${options.data ? `?${qs.stringify(options.data)}` : ''}`, config)
+  case 'delete':
+    return axios.delete(url, { ...config, data })
+  case 'post':
+    return axios.post(url, data, config)
+  case 'put':
+    return axios.put(url, data, config)
+  default:
+    return axios(options)
   }
 }
 

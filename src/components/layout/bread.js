@@ -68,8 +68,8 @@ function Bread() {
         {pathSet[item].icon ? pathSet[item].icon : ''}
         {
           ((pathNames.length - 1 === key) || !pathSet[item].clickable) ? <span className="ml-5">{pathSet[item].name}</span> : <LinkTo className="ml-5" to={{ pathname: pathSet[item].path }}>
-              {pathSet[item].name}
-            </LinkTo>
+            {pathSet[item].name}
+          </LinkTo>
         }
       </Breadcrumb.Item>
     )

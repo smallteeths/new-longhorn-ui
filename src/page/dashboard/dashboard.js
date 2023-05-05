@@ -4,6 +4,17 @@ import store from '../../models/store';
 import ResourceOverview from './resourceOverview'
 import EventLogs from './eventLogs'
 import { saveSorter } from '../../utils/localStore'
+import {
+  FETCH_VOLUME, 
+  FETCH_EVENTLOG,
+  FETCH_NODE,
+  NODE_CONNECT_WS,
+  EVENTLOG_CONNECT_WS,
+  DISCONNECT_NODE_WEBSOCKET,
+  DISCONNECT_EVENTLOG_WEBSOCKET,
+  VOLUME_CONNECT_WS,
+  DISCONNECT_VOLUME_WEBSOCKET
+} from '../../models/actionTypes'
 
 export function Dashboard() {
   const action = type => store.dispatch({type})
@@ -16,11 +27,21 @@ export function Dashboard() {
   
   useEffect(()=>{
     // FETCH_EVENTLOG
-    action('FETCH_EVENTLOG')
+    action(FETCH_EVENTLOG)
     // FETCH_VOLUME
-    action('FETCH_VOLUME')
+    action(FETCH_VOLUME)
     // FETCH_NODE
-    action('FETCH_NODE')
+    action(FETCH_NODE)
+    action(NODE_CONNECT_WS)
+    action(EVENTLOG_CONNECT_WS)
+    action(VOLUME_CONNECT_WS)
+
+
+    return () => {
+      action(DISCONNECT_NODE_WEBSOCKET)
+      action(DISCONNECT_EVENTLOG_WEBSOCKET)
+      action(DISCONNECT_VOLUME_WEBSOCKET)
+    }
   }, [])
 
   const resourceOverviewProps = {

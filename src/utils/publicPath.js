@@ -9,4 +9,3 @@ export default function getBasePath() {
 	console.log(window.__pathname_prefix__)
 	return window.__pathname_prefix__
 }
-  

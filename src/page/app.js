@@ -1,9 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet'
 import { ConfigProvider, Layout } from 'antd'
-import {
-    Outlet,
-  } from "react-router-dom";
+import { Outlet } from 'react-router-dom';
 import { config } from '../utils'
 import Header from '../components/layout/header'
 import Bread from '../components/layout/bread'

@@ -25,11 +25,11 @@ class Store {
     this.storage.clear()
   }
 
-  serialize = (obj) => {
+  serialize(obj) {
     return JSON.stringify(obj)
   }
 
-  deserialize = (strVal, defaultVal) => {
+  deserialize(strVal, defaultVal) {
     if (!strVal) {
       return defaultVal
     }

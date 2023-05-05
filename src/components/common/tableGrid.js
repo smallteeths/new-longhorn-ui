@@ -12,7 +12,6 @@ const TableGrid = function ({columns, dataSource, mainKey, rowKey, currentPage =
   useEffect(()=>{
     const tableData = parseData(dataSource, pageSize, currentPage)
     setStateDataSource(tableData.data)
-    console.log(tableData.currentPage)
     setstateCurrentPage(tableData.currentPage)
     setPropsCurrentPage(tableData.currentPage)
   }, [pageSize, currentPage, dataSource, setPropsCurrentPage])
