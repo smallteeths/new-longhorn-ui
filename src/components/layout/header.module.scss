@@ -7,7 +7,7 @@
   height: 60px;
   font-size: 14px;
   color: white;
-  background-color: #0075a8;
+  background-color: $menu-background-color;
   width: 100%;
 
   :global a {
@@ -15,18 +15,18 @@
   }
 
   :global .ant-menu {
-    background-color: #0075a8;
+    background-color: $menu-background-color;
 
     .ant-menu-item-selected, .ant-menu-submenu-selected {
       border-bottom: 4px solid $color-primary-light;
-      background-color: #00558b;
+      background-color: $color-primary;
     }
     .ant-menu-item-selected {
       &::after {
         border-bottom: none !important;
       }
       border-bottom: 4px solid $color-primary-light;
-      background-color: #00558b;
+      background-color: $color-primary;
     }
     .ant-menu-item:hover, .ant-menu-submenu:hover {
       color: #78c9cf;
@@ -53,7 +53,7 @@
   }
 
   :global .ant-menu-horizontal {
-    border-bottom: 1px solid #0075a8;
+    border-bottom: 1px solid $menu-background-color;
   }
 
   :global .ant-menu-item, :global .ant-menu-submenu {
@@ -68,7 +68,7 @@
 
   .menuCol {
     color: white;
-    background-color: #0075a8;
+    background-color: $menu-background-color;
   }
 
   .logoContainer {

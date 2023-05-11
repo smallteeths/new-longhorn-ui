@@ -4,6 +4,7 @@ import { commonFetchData, commonSetLoading, commonSetWsStatus } from '../actions
 export const eventLogSlice = createSlice({
   name: 'eventLog',
   initialState: {
+    name: 'eventLog',
     loading: false,
     wsStatus: false,
     data: [],

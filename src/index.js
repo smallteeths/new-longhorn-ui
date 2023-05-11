@@ -7,6 +7,7 @@ import {
 import { Provider } from 'react-redux'
 import reportWebVitals from './reportWebVitals';
 import router from './router';
+import './utils/base'
 
 // import assets
 import './assets/iconfont/iconfont.eot'

@@ -4,6 +4,7 @@ import { commonFetchData, commonSetLoading, commonSetWsStatus } from '../actions
 export const nodeSlice = createSlice({
   name: 'node',
   initialState: {
+    name: 'node',
     loading: false,
     wsStatus: false,
     data: [],

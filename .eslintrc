@@ -1,4 +1,5 @@
 {
+  "parser": "@babel/eslint-parser",
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
@@ -8,6 +9,11 @@
     "react",
     "react-hooks"
   ],
+  "settings": {
+    "react": {
+      "version": "18.2.0"
+    }
+  },
   "parserOptions": {
     "ecmaVersion": 2021,
     "sourceType": "module",

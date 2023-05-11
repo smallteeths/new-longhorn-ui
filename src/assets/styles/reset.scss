@@ -1,4 +1,7 @@
+@import "./vars.scss";
+
 body {
+  color: $text-color;
   height: 100%;
   overflow-y: hidden!important;
   background-color: #ecf0f1!important;

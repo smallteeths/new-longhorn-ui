@@ -52,6 +52,7 @@ export default function request(options) {
     if (!options.silence) {
       message.error(error.response.data.message || error.message)
     }
+    return error && error.response
   }).catch((error) => {
     const { response = { statusText: 'Network Error' } } = error
     return { code: 1, message: response.statusText }

@@ -6,10 +6,9 @@ import {
 import { useSelector } from 'react-redux'
 import { Table, Input, Button, Spin } from 'antd'
 import TableGrid from '../../components/common/tableGrid'
-import classnames from 'classnames'
 import { sortTable, sortTableByISODate, setSortOrder } from '../../utils/sort'
 import { getSorter } from '../../utils/localStore'
-import styles from './eventLogs.module.scss'
+import './eventLogs.scss'
 
 const parseData = (parameterData) => {
   if (!parameterData) {
@@ -286,8 +285,8 @@ function EventLogs(props) {
 
   return (
     <Spin spinning={loading}>
-      <div className={classnames(styles.eventLogs,'px-20 mt-20')}>
-        <div className={classnames(styles.title, 'font-extrabold text-18 text-current mt-10 mb-10')}>Event Log</div>
+      <div className='px-20 mt-20 eventLogs'>
+        <div className='font-extrabold text-18 text-current mt-10 mb-10'>Event Log</div>
         {!isPhoneSize && <div className="content">
           <Table columns={columns}
             onChange={onChange}

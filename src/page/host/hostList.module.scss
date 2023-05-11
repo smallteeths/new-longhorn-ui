@@ -1,0 +1,21 @@
+@import "../../assets/styles/vars.scss";
+
+.status {
+  color: $color-success;
+}
+.status, .name, .allocated, .replicas, .used, .size {
+  text-align: center !important; 
+}
+.allowScheduling {
+  text-align: right !important;
+}
+.link {
+  color: $color-link;
+}
+a {
+  color: $color-link;
+}
+.secondLabel {
+  font-size: 13px;
+}
+  

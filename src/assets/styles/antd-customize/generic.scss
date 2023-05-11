@@ -1,0 +1,206 @@
+@import "../vars.scss";
+
+@mixin no-highlight {
+  border-color: #e5e5e5 !important;
+  box-shadow: none !important;
+}
+
+.ant-btn-success {
+  color: $content-background-color;
+  background-color: #27AE5F;
+  border-color: #27AE5F;
+  &:hover, &:focus {
+    color: $content-background-color;
+    background-color: darken(#27AE5F, 10%);
+    border-color: darken(#27AE5F, 10%);
+  }
+}
+
+.ant-btn-primary {
+  background-color: $color-primary ;
+  border-color: $color-primary ;
+  &:hover, &:focus {
+    background-color: $color-primary-hover ;
+    border-color: $color-primary-hover ;
+  }
+}
+
+.ant-table-content {
+  .ant-table {
+    .ant-table-thead > tr > th {
+      text-align: center;
+      background: #F5F8FA;
+      color: black;
+    }
+  }
+}
+
+.ant-input-group-addon {
+  padding: 8px 22px 4px 7px !important;
+}
+
+.ant-card {
+  .ant-card:hover {
+    overflow: visible;
+  }
+}
+
+.ant-table {
+  .ant-table-thead th.ant-table-column-has-sorters:hover {
+    background-color: #117ca0;
+  }
+  .ant-table-thead > tr > th, 
+  .ant-table-thead > tr > th.ant-table-column-sort {
+    text-align: center;
+    background: $color-primary-light;
+    color: white;
+  }
+  
+  .ant-table-thead > tr > th.ant-table-column-has-actions.ant-table-column-has-sorters:hover {
+    background: #108eb9 !important;
+  }
+
+  .ant-table-body {
+    height: 3000px;
+  }
+
+  .ant-table-tbody > tr > td {
+    text-align: center;
+    .ant-table > .ant-table-content > .ant-table-scroll > .ant-table-body {
+      height: auto;
+    }
+  }
+  
+  .ant-table-tbody > tr:hover:not(.ant-table-expanded-row) > td {
+    background: $hover-row-background !important;
+  }
+  
+  &.ant-table-small {
+    .ant-table-thead > tr > th {
+      background: #108eb9 !important;
+    }
+    
+    .ant-table-body {
+      margin: 0 0 !important;
+    }
+    
+    .ant-table-body > table {
+      padding: 0;
+    }
+  }
+  
+  .ant-table-column-sorters {
+    display: flex !important;
+    justify-content: center !important;
+  }
+  
+  .ant-table-column-sorter {
+    display: inline !important;
+    text-align: center;
+    .anticon-caret-up, .anticon-caret-down {
+      font-size: 16px !important;
+    }
+  }
+}
+
+.ant-table-pagination {
+  float: none !important;
+  display: table;
+  margin: 8px auto !important;
+}
+
+.ant-popover-inner {
+  border: none;
+  border-radius: 0;
+  box-shadow: 0 0 20px rgba(100, 100, 100, 0.2);
+}
+
+.ant-form {
+  color: $text-color !important;
+  .ant-select,
+  .ant-input-group {
+    color: $text-color;
+  }
+}
+
+.ant-form-item-children-icon {
+  right: -30px !important;
+}
+
+.ant-form-item-control {
+  vertical-align: middle;
+}
+
+.settings-container .ant-form-item-control {
+  vertical-align: middle;
+  line-height: 34px;
+}
+
+.settings-container p {
+  margin-bottom: 0 !important;
+}
+
+.ant-progress-status-active .ant-progress-bg {
+  background-color: $color-warning;
+}
+.ant-progress-status-success .ant-progress-bg {
+  background-color: #27AE5F !important;
+}
+
+.anticon-cross {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  right: 84px;
+  cursor: pointer;
+  color: #fff;
+  line-height: 18px;
+  border-radius: 50%!important;
+  background-color: rgba(0, 0, 0, .16);
+  top: 7px;
+  // opacity:
+}
+
+.ant-select {
+  &.ant-select-selector,
+  &.ant-select-focused .ant-select-selection,
+  &.ant-select-open .ant-select-selection,
+  .ant-select-selection:active,
+  .ant-select-selection:focus,
+  .ant-select-selection:hover {
+    @include no-highlight;
+  }
+}
+
+.ant-input-affix-wrapper:focus, .ant-input-affix-wrapper-focused,
+.ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover {
+  @include no-highlight;
+}
+
+.ant-select:not(.ant-select-disabled):focus .ant-select-selector,
+.ant-select:not(.ant-select-disabled):hover .ant-select-selector,
+.ant-select:not(.ant-select-disabled):active .ant-select-selector {
+  @include no-highlight;
+}
+
+.ant-input {
+  &:focus,
+  &:hover {
+    @include no-highlight;
+  }
+  flex-shrink: 1;
+  flex-grow: 1;
+}
+
+.ant-btn {
+  min-width: 80px;
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.ant-select-lg .ant-select-selection--single {
+  height: 36px;
+}
+.ant-select-lg .ant-select-selection__rendered {
+  line-height: 34px;
+}

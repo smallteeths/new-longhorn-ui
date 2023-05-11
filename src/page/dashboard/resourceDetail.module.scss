@@ -33,7 +33,7 @@
       .clickable {
         cursor: pointer;
         &:hover {
-          background-color: #ebf2f6;
+          background-color: $hover-row-background;
         }
       }
     }

@@ -32,7 +32,7 @@ const getPathSet = function (menuArray, parentPath) {
 getPathSet(menu)
 
 function Bread() {
-  let location = useLocation();
+  const location = useLocation();
   let pathNames = []
   const paths = {}
 

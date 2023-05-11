@@ -5,11 +5,11 @@ import { Outlet } from 'react-router-dom';
 import { config } from '../utils'
 import Header from '../components/layout/header'
 import Bread from '../components/layout/bread'
+import Footer from '../components/layout/footer'
 
-const { Content, Footer } = Layout;
+const { Content } = Layout;
 
 export function APP() {
-
   return (
     <ConfigProvider
       getPopupContainer={node => {
@@ -33,9 +33,7 @@ export function APP() {
             <Outlet />
           </div>
         </Content>
-        <Footer>
-          longhorn
-        </Footer>
+        <Footer />
       </Layout>
     </ConfigProvider>
   )

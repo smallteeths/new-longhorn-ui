@@ -1,0 +1,19 @@
+@import "../../assets/styles/vars.scss";
+
+.footer {
+  padding: 15px;
+  background-color: $footer-background-color;
+  width: 100%;
+
+  a {
+    font-size: 13px;
+    padding: 5px 10px;
+    color: $color-link;
+  }
+
+  img {
+    height: 16px;
+    width: 16px;
+    vertical-align: middle
+  }
+}

@@ -4,6 +4,7 @@ import { commonFetchData, commonSetLoading, commonSetWsStatus } from '../actions
 export const volumeSlice = createSlice({
   name: 'volume',
   initialState: {
+    name: 'volume',
     loading: false,
     wsStatus: false,
     data: [],

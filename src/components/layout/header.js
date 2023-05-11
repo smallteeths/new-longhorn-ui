@@ -11,7 +11,7 @@ import Menus from './menu'
 import longhornLogo from '../../assets/images/longhorn-logo.svg'
 
 function Header() {
-  let location = useLocation();
+  const location = useLocation();
   const isNavbar = useWindowSize();
   const menusProps = {
     location,
